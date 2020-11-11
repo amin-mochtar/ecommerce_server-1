@@ -1,0 +1,12 @@
+1. install jest dev dependecie
+2. contoh mau bikin test sum, TDD concept ==> test sumnya dahulu 
+3. untuk menjalankan ubah script di package menjadi jest
+
+
+
+
+*** untuk mengetes api atau enpoint menggunakan supertest 
+
+install package supertest nya
+
+*** bin/www.js digunakan ketika
