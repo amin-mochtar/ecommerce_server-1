@@ -37,43 +37,6 @@ CONTENT:
 {
   message: "bad request"
 }
-
-```
-***
-## Sign In Using Google
-***
-sign in with google account
-1. URL  `localhost:3000/googleLogin`
-2. Method `POST`
-3. URL Param `not required`
-4. Data
-```javascript
-your google account
-{
-	"email": "yourmail@mail.com",
-	"password": "yourpassword",
-}
-
-```
-5. Success Response
-```javascript
-CODE : 201
-
-CONTENT :
-{
-  token,
-  message: "success login"
-}
-```
-6. Error Response
-```javascript
-CODE: 500 
-
-CONTENT:
-{
-  error,
-  message: 'Internal Server Error'
-}
 ```
 ***
 ## logout
