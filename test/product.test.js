@@ -6,6 +6,26 @@ const request = require('supertest')
 const { queryInterface } = sequelize
 
 
+let ProductTestMinus = {
+    name: "imgae",
+    image_url: "https://imgur.com/AU2NT88",
+    price: -1,
+    stock: -1,
+};
+
+let ProductNotNumber = {
+    name: "imgae",
+    image_url: "https://imgur.com/AU2NT88",
+    price: '10',
+    stock: '10',
+};
+
+let ProductEmpty = {
+    name: "",
+    image_url: "",
+    price: "",
+    stock: "",
+};
 
 let access_token;
 let userId;
@@ -131,6 +151,22 @@ describe('POST Create products', () => {
                 done(err)
             })
     })
+    it("Create product gagal karena stock dan price minus", (done) => {
+        request(app)
+            .post(`/products`)
+            .send(ProductTestMinus)
+            .set({ access_token: access_token })
+            .then((response) => {
+                const { status, body } = response;
+                expect(status).toEqual(400);
+                expect(body).toHaveProperty('message', "Validation min on price failed, Validation min on stock failed")
+                done();
+            })
+            .catch((err) => {
+                console.log(err);
+                done();
+            });
+    });
 })
 
 describe('GET /products', () => {
@@ -152,7 +188,7 @@ describe('GET /products', () => {
             })
     })
 
-    it('gagal fetch all product', (done) => {
+    it('gagal fetch all product access token kosong', (done) => {
         request(app)
             .get('/products')
             .set({ access_token: null })
@@ -231,24 +267,62 @@ describe('PUT Edit products', () => {
                 done(err)
             })
     })
-    // it('gagal edit product karena stock minus', (done) => {
-    //     request(app)
-    //         .put(`/products/${id}`)
-    //         .set({ access_token: access_token })
-    //         .send({ name: 'produk murah', image_url: 'image_url.jpg', price: 5000, stock: -30 },)
-    //         .then(product => {
-
-    //             let { body, status } = product
-
-    //             expect(status).toEqual(400)
-    //             expect(body).toHaveProperty('message', 'Validation min on stock failed')
-    //         })
-    //         .catch(err => {
-    //             console.log({ err })
-    //             // exerrpect(err).toBeNull
-    //             done(err)
-    //         })
-    // })
+    it("Update gagal karena stock dan price minus", (done) => {
+        request(app)
+            .put(`/products/${id}`)
+            .send(ProductTestMinus)
+            .set({ access_token: access_token })
+            .then((response) => {
+                const { status, body } = response;
+                expect(status).toEqual(400);
+                expect(body).toHaveProperty('message', "Validation min on price failed, Validation min on stock failed")
+                done();
+            })
+            .catch((err) => {
+                console.log(err);
+                done();
+            });
+    });
+    it("Update gagal karena ada field kosong", (done) => {
+        request(app)
+            .put(`/products/${id}`)
+            .send(ProductEmpty)
+            .set({ access_token: access_token })
+            .then((response) => {
+                const { status, body } = response;
+                expect(status).toEqual(400);
+                expect(body).toHaveProperty("message", 
+                    "Validation notEmpty on name failed",
+                    "Validation notEmpty on image_url failed",
+                    "Validation notEmpty on price failed",
+                    "Validation notEmpty on stock failed",
+                );
+                done();
+            })
+            .catch((err) => {
+                console.log(err);
+                done();
+            });
+    });
+    it("Update gagal karena stock dan price bukan number", (done) => {
+        request(app)
+            .put(`/products/${id}`)
+            .send(ProductNotNumber)
+            .set({ access_token: access_token })
+            .then((response) => {
+                const { status, body } = response;
+                expect(status).toEqual(400);
+                expect(body).toHaveProperty("message", 
+                    "Validation notNumber on price failed",
+                    "Validation notNumber on stock failed",
+                );
+                done();
+            })
+            .catch((err) => {
+                console.log(err);
+                done();
+            });
+    });
 })
 
 describe('DELETE products', () => {
@@ -271,7 +345,7 @@ describe('DELETE products', () => {
                 done(err)
             })
     })
-    it('gagal delete product', (done) => {
+    it('gagal delete product karena access token kosong', (done) => {
         request(app)
             .delete(`/products/${id}`)
             .set({ access_token: null })

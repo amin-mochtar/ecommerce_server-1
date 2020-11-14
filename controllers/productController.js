@@ -71,7 +71,7 @@ class ProductController {
             res.status(200).json({message: 'success delete product'})
         })
         .catch(err => {
-            console.log('erorrr deletee', err)
+            // console.log('erorrr deletee', err)
             next(err)
         })
     }
