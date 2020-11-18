@@ -18,8 +18,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       stock: {
-        type: Sequelize.INTEGER,
-        min: 0
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
