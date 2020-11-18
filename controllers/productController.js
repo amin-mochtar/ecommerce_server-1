@@ -27,8 +27,8 @@ class ProductController {
         },{
             returning:true
         })
-        .then(todo => {
-            res.status(201).json(todo)
+        .then(product => {
+            res.status(201).json(product)
         })
         .catch(err => {
             next(err)
