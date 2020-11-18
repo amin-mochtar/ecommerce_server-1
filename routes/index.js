@@ -7,9 +7,9 @@ const authentication = require('../middlewares/authentication')
 const authorization = require('../middlewares/authorization')
 // const ProductController = require('../controllers/productController')
 
-// router.post('/login', userController.login)
+router.post('/login', userController.login)
 router.post('/register', userController.register)
-router.post('/login', userController.loginCustomer)
+// router.post('/login', userController.loginCustomer)
 // router.get("/carts", CartController.listCart)
 
 router.use(authentication)
