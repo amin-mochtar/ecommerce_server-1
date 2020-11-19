@@ -2,15 +2,13 @@ const { Product } = require('../models/index')
 
 class ProductController {
     static findAll(req, res, next){
-        const userId = req.loggedInUser.id
-        Product.findAll({
-            where: {UserId: userId}
-        })
+        // const userId = req.loggedInUser.id
+        Product.findAll()
         .then( product => {
-            
             res.status(200).json(product)
         })
         .catch(err => {
+            console.log({err});
             next(err)
         })
     }
@@ -27,8 +25,8 @@ class ProductController {
         },{
             returning:true
         })
-        .then(todo => {
-            res.status(201).json(todo)
+        .then(product => {
+            res.status(201).json(product)
         })
         .catch(err => {
             next(err)

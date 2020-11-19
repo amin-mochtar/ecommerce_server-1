@@ -19,8 +19,8 @@ function authentication(req, res, next){
         })
         .then(user => {
             // console.log({USERRR: user});
-            if(user.role !== 'admin' || user.role === undefined){
-                // console.log('INI ADMIN?');
+            if(user.role !== 'customer' || user.role === undefined){
+                console.log('INI bukan CUSTOMER');
                 throw {message: "user not found"}
             } else {
                 req.loggedInUser = decoded

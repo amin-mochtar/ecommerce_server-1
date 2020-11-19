@@ -8,7 +8,7 @@ function authorization(req, res, next){
     .then(data => {
         if(!data){
             throw{ message : 'product not found', status: 404}
-        } else if (data.UserId === req.loggedInUser.id){
+        } else if (data.UserId === req.loggedInUser.id && req.loggedInUser.role === 'admin'){
             next()
         } else {
             throw { message: 'Unauthorized', status: 401}
