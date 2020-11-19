@@ -263,8 +263,7 @@ CONTENT: {
 ***
 ## Show all product on cart e-commerce
 ***
-show all todo list ( authenticated customer only )
-
+show all cart list ( authenticated customer only )
 1. URL  `localhost:3000/carts`
 2. Method `GET`
 3. URL Param 
@@ -287,7 +286,7 @@ CONTENT: {
 }
 ```
 ***
-## Edit quantity card
+## Edit quantity cart
 ***
 edit your product ( authenticated customer only )
 1. URL  `localhost:3000/carts/:id`
