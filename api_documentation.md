@@ -288,7 +288,7 @@ CONTENT: {
 ***
 ## Edit quantity cart
 ***
-edit your product ( authenticated customer only )
+edit your quantity product at cart( authenticated customer only )
 1. URL  `localhost:3000/carts/:id`
 2. Method `PUT`
 3. URL Param `cartId`
@@ -325,7 +325,7 @@ CONTENT:
 ***
 ## Delete cart
 ***
-delete your product ( authenticated customer only )
+delete your product from cart ( authenticated customer only )
 
 1. URL  `localhost:3000/carts/:id`
 2. Method `DELETE`
